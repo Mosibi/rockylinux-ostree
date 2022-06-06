@@ -1,0 +1,20 @@
+mkdir -p build/repo
+cd build/
+ostree --repo=repo init --mode=archive
+sudo rpm-ostree compose tree  --cachedir=/home/richard/rocky-coreos/build/cache  --repo=/home/richard/rocky-coreos/build/repo config/manifest.yaml
+sudo tar cvzf repo.tar.gz build/repo
+scp repo.tar.gz root@192.168.122.89:
+
+
+# 2de keer
+mkdir -p build/{repo,cache}
+ostree --repo=build/repo init --mode=archive
+sudo rpm-ostree compose tree  --cachedir=/home/richard/rocky-coreos/build/cache  --repo=/home/richard/rocky-coreos/build/repo config/manifest.yaml
+
+
+####
+ostree --repo=./build/repo ls rocky/x86_64/coreos
+ostree --repo=./build/repo ls rocky/x86_64/coreos /etc
+ostree --repo=./build/repo cat rocky/x86_64/coreos /usr/etc/passwd
+ostree --repo=./build/repo ls rocky/x86_64/coreos /usr/lib/systemd/system/*get*
+sudo rsync -av --delete /home/richard/rocky-coreos/build/repo root@192.168.122.89:/var/www/html/ostree/

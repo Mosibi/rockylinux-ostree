@@ -1,0 +1,16 @@
+ref: rocky/${basearch}/coreos
+rojig:
+  name: rocky-coreos
+  summary: "Rocky Linux CoreOS"
+  license: MIT
+packages:
+  - rocky-release
+
+repos:
+  - rocky-86-baseos
+  - rocky-86-appstream
+
+include:
+  - manifests/rocky-coreos-base.yaml
+  - manifests/rocky-coreos-system_tools.yaml
+  - manifests/rocky-coreos-post.yaml

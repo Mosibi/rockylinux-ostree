@@ -1,0 +1,6 @@
+postprocess:
+  - |
+    #!/usr/bin/env bash
+    set -xeuo pipefail
+
+    # Placeholder for commands

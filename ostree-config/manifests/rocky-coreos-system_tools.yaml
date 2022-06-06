@@ -1,0 +1,14 @@
+# config/manifests/rocky-coreos-system_tools.yaml
+# 
+# Contains system (tools) packages which are often used on a regular
+# system, but not needed for the base system to work
+packages:
+  - NetworkManager
+  - iproute
+  - iputils
+  - openssh-clients
+  - openssh-server
+  - less
+  - vim
+  - strace
+  - lsof

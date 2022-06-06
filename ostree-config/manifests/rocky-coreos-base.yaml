@@ -1,0 +1,33 @@
+packages:
+  - rpm
+  - policycoreutils
+  - kernel
+  - kernel-modules-extra
+  - rpm-ostree
+  - ostree-grub2
+  - selinux-policy-targeted
+  - lvm2
+  - biosdevname
+  - keyutils
+  - binutils
+  - nss-altfiles
+  - polkit
+
+ignore-removed-users:
+  - root
+ignore-removed-groups:
+  - root
+etc-group-members:
+  - wheel
+  - sudo
+  - systemd-journal
+  - adm
+
+
+check-passwd:
+  type: "file"
+  filename: "passwd"
+check-groups:
+  type: "file"
+  filename: "group"
+

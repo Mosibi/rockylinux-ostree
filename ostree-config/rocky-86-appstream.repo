@@ -1,0 +1,8 @@
+[rocky-86-appstream]
+name=Rocky Linux 8.6 - AppStream
+#baseurl=http://dl.rockylinux.org/pub/rocky/8.6/AppStream/x86_64/os/
+baseurl=http://192.168.122.89/repos/rocky86/AppStream/
+gpgcheck=1
+enabled=1
+countme=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rockyofficial
