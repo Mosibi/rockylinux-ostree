@@ -6,7 +6,6 @@ packages:
   - rpm-ostree
   - ostree-grub2
   - selinux-policy-targeted
-  - lvm2
   - biosdevname
   - keyutils
   - binutils
