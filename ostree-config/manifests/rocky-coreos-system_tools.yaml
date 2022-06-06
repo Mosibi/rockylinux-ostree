@@ -1,4 +1,4 @@
-# config/manifests/rocky-coreos-system_tools.yaml
+# config/manifests/rocky-ostree-system_tools.yaml
 # 
 # Contains system (tools) packages which are often used on a regular
 # system, but not needed for the base system to work

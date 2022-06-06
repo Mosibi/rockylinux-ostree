@@ -1,7 +1,7 @@
-ref: rocky/${basearch}/coreos
+ref: rocky/${basearch}/ostree
 rojig:
-  name: rocky-coreos
-  summary: "Rocky Linux CoreOS"
+  name: rocky-ostree
+  summary: "Rocky Linux Ostree"
   license: MIT
 packages:
   - rocky-release
@@ -11,6 +11,6 @@ repos:
   - rocky-86-appstream
 
 include:
-  - manifests/rocky-coreos-base.yaml
-  - manifests/rocky-coreos-system_tools.yaml
-  - manifests/rocky-coreos-post.yaml
+  - manifests/rocky-ostree-base.yaml
+  - manifests/rocky-ostree-system_tools.yaml
+  - manifests/rocky-ostree-post.yaml

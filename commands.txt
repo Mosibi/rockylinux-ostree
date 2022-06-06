@@ -1,6 +1,6 @@
 Commands/notes
 
-ostree --repo=./build/repo ls rocky/x86_64/coreos
-ostree --repo=./build/repo ls rocky/x86_64/coreos /etc
-ostree --repo=./build/repo cat rocky/x86_64/coreos /usr/etc/passwd
-ostree --repo=./build/repo ls rocky/x86_64/coreos /usr/lib/systemd/system/*get*
+ostree --repo=./build/repo ls rocky/x86_64/ostree
+ostree --repo=./build/repo ls rocky/x86_64/ostree /etc
+ostree --repo=./build/repo cat rocky/x86_64/ostree /usr/etc/passwd
+ostree --repo=./build/repo ls rocky/x86_64/ostree /usr/lib/systemd/system/*get*
