@@ -1,5 +1,11 @@
 # Rocky Linux Ostree
-This repository contains all the bits to get a working Ostree for Rocky Linux (8.6)
+This repository contains all the bits to get a working Ostree for Rocky Linux (8.6). If you want to build a Rocky Linux CoreOS, in other words
+a Red Hat CoreOS clone, then checkout [coreos-assembler](https://coreos.github.io/rpm-ostree/compose-server). Other sites with information about CoreOS and building custom OStree(s):
+
+* https://coreos.github.io/rpm-ostree/compose-server/
+* https://www.osbuild.org/
+
+Especially osbuild is a very nice project/tool which is now incorperated in the more recent Red Hat versions.
 
 ## Dir: bootserver
 Contains an Ansible playbook to configure a PXE bootserver
