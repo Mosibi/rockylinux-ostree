@@ -30,3 +30,6 @@ check-groups:
   type: "file"
   filename: "group"
 
+units:
+  - getty@tty1.service
+
