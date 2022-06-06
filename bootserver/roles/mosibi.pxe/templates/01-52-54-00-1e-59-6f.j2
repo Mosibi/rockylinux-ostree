@@ -1,0 +1,6 @@
+DEFAULT linux
+
+label linux
+    SAY Now booting the Rock Linux 8.6 OSTree
+    KERNEL rocky86/vmlinuz
+    APPEND vga=normal initrd=rocky86/initrd.img inst.stage2=http://{{ dhcpd_next_server }}/repos/rocky86 inst.ks=http://{{ dhcpd_next_server }}/kickstart/ostree.cfg ksdevice=bootif inst.loglevel=debug

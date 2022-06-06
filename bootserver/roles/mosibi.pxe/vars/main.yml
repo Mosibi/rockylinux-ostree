@@ -1,0 +1,11 @@
+---
+# vars file for mosibi.pxe
+required_packages:
+  - rsync
+  - tftp-server
+  - syslinux-tftpboot
+  - syslinux
+  - httpd
+
+tftpd_service: tftp.service
+apache_service: httpd.service

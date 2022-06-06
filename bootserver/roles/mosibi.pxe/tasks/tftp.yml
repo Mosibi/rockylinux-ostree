@@ -1,0 +1,39 @@
+---
+- name: Copy bootloader files
+  ansible.builtin.synchronize:
+    src: /tftpboot/
+    dest: /var/lib/tftpboot/
+  delegate_to: "{{ inventory_hostname }}"
+  tags:
+    - tftp
+
+- name: Create pxelinux.cfg directory
+  file:
+    path: /var/lib/tftpboot/pxelinux.cfg
+    state: directory
+    mode: 0755
+    owner: root
+    group: root
+  tags:
+    - tftp
+
+- name: Copy default PXE config file
+  template:
+    src: "{{ item }}.j2"
+    dest: "/var/lib/tftpboot/pxelinux.cfg/{{ item }}"
+    mode: 0644
+    owner: root
+    group: root
+  loop:
+    - default
+    - 01-52-54-00-1e-59-6f
+  tags:
+    - tftp
+
+- name: Start and enable tftpd
+  ansible.builtin.service:
+    name: "{{ tftpd_service }}"
+    state: started
+    enabled: yes
+  tags:
+    - tftp

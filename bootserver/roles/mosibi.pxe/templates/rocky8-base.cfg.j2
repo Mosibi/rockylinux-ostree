@@ -1,0 +1,60 @@
+# Install OS instead of upgrade
+install
+# Keyboard layouts
+keyboard 'us'
+# Root password
+rootpw --plaintext rocky
+user --name=ansible --password=rocky --plaintext --gecos="Ansible User"
+
+# System language
+lang en_US.UTF-8
+# Firewall configuration
+firewall --enabled --ssh
+# Power off after installation
+poweroff
+# Network information
+#attempting to put it in the included ks file that accepts hostname from the virsh command.
+# System timezone
+timezone Europe/Amsterdam --isUtc --nontp
+# System authorization information
+auth  --useshadow  --passalgo=sha512
+# Use network installation instead of CDROM installation media
+url --url="http://mirror.nl.stackscale.com/rocky/8.6/BaseOS/x86_64/os"
+
+# Use text mode install
+text
+# SELinux configuration
+selinux --enforcing
+# Do not configure the X Window System
+skipx
+
+firstboot --disabled
+
+# System bootloader configuration
+bootloader --location=mbr
+# Partition clearing information
+clearpart --all --initlabel
+# Disk partitioning information
+autopart --type=lvm
+
+%packages
+@^minimal-environment
+@container-management
+@system-tools
+kexec-tools
+vim
+python3
+%end
+
+%post --nochroot
+hostnamectl set-hostname myhost.example.com
+hostnamectl --pretty set-hostname myhost.example.com
+cp /etc/hostname /mnt/sysimage/etc/hostname
+cp /etc/machine-info /mnt/sysimage/etc/machine-info
+%end
+
+%post
+echo "ansible ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/user-ansible
+chmod 0440 /etc/sudoers.d/user-ansible
+
+%end

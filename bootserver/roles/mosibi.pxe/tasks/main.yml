@@ -1,0 +1,28 @@
+---
+# tasks file for mosibi.pxe
+
+- name: Install all required software
+  ansible.builtin.package:
+    name: "{{ required_packages }}"
+    state: present
+  tags:
+    - pxe
+
+- name: TFTP tasks
+  include_tasks: tftp.yml
+  tags:
+    - pxe
+    - tftp
+
+- name: Webserver tasks
+  include_tasks: apache.yml
+  tags:
+    - pxe
+    - apache
+    - webserver
+
+- name: ISO tasks
+  include_tasks: iso.yml
+  tags:
+    - pxe
+    - iso

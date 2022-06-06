@@ -1,0 +1,31 @@
+---
+
+- name: Create directories to store OSTREE images and Kickstart files
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+  loop:
+    - "/var/www/html/ostree"
+    - "/var/www/html/kickstart"
+  tags:
+    - apache
+    - webserver
+
+- name: Copy kickstart files
+  ansible.builtin.template:
+    src: "{{ item }}.j2"
+    dest: "/var/www/html/kickstart/{{ item }}"
+    mode: '0644'
+  loop:
+    - ostree.cfg
+    - rocky8-base.cfg
+
+- name: Start and enable Apache
+  ansible.builtin.service:
+    name: "{{ apache_service }}"
+    state: started
+    enabled: yes
+  tags:
+    - apache
+    - webserver

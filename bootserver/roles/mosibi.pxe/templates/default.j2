@@ -1,0 +1,20 @@
+# display a menu with a list of installation options
+default menu.c32
+# show prompt, 0 - disabled, 1 - enabled
+prompt 0
+# timeout, 1 second = 10
+timeout 100
+# pick label on timeout
+ONTIMEOUT 1
+
+menu title ########## PXE Boot Menu ##########
+
+label 1
+menu label ^1) Boot from local drive. Do not install anything.
+localboot 0
+menu default
+
+label 2
+menu label ^2) Rocky Linux 8.6 OStree
+kernel rocky86/vmlinuz
+append vga=normal initrd=rocky86/initrd.img inst.ks=http://{{ dhcpd_next_server }}/kickstart/ostree.cfg ksdevice=bootif

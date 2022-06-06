@@ -1,0 +1,24 @@
+---
+- hosts: bootservers
+  become: true
+  vars:
+    dhcpd_ipv4_interface: eth1
+    dhcpd_default_lease_time: 3600
+    dhcpd_max_lease_time: 7200
+    dhcpd_subnet_mask: 255.255.255.0
+    dhcpd_broadcast_address: 192.168.100.255
+    dhcpd_routers: 192.168.100.254
+    dhcpd_domain_name_servers:
+      - "192.168.10.1"
+    dhcpd_domain_search: install
+    dhcpd_filename: pxelinux.0
+    dhcpd_next_server: 192.168.100.254
+    dhcpd_subnets:
+      - network: 192.168.100.0
+        netmask: 255.255.255.0
+        range_start: 192.168.100.100
+        range_end: 192.168.100.200
+  roles:
+    - linux-system-roles.network
+    - robertdebock.dhcpd
+    - mosibi.pxe

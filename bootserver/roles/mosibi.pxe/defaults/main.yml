@@ -1,0 +1,13 @@
+---
+# defaults file for mosibi.pxe
+
+iso_dest_directory: /var/www/html/isos
+iso_mount_directory: /var/www/html/repos
+
+iso_images:
+  - name: rhel86
+    description: "Red Hat Enterprise Linux 8.6"
+    url: http://192.168.122.89/isos/rhel-8.6-x86_64-dvd.iso
+  - name: rocky86
+    description: "Rocky Linux 8.6"
+    url: https://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.6-x86_64-dvd1.iso

@@ -1,0 +1,76 @@
+---
+- name: Create directories to store and mount ISO images
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+  loop:
+    - "{{ iso_dest_directory }}"
+    - "{{ iso_mount_directory }}"
+  tags:
+    - iso
+
+- name: Download ISO images
+  ansible.builtin.get_url:
+    url: "{{ item['url'] }}"
+    dest: "{{ iso_dest_directory }}/{{ _filename }}"
+    mode: 0644
+  vars:
+    _filename: "{{ item['url'] | urlsplit('path') | basename }}"
+  loop: "{{ iso_images }}"
+  loop_control:
+    label: "{{ item['description'] }}"
+  register: _isos_downloaded
+  tags:
+    - iso
+
+- name: Mount ISO images read-only
+  ansible.posix.mount:
+    path: "{{ iso_mount_directory }}/{{ _iso['item']['name'] }}"
+    src: "{{ _iso['dest'] }}"
+    fstype: iso9660
+    opts: loop,noauto
+    state: mounted
+  loop: "{{ _isos_downloaded['results'] }}"
+  loop_control:
+    label: "{{ _iso['item']['description'] }}"
+    loop_var: _iso
+  tags:
+    - iso
+
+- name: Create TFTP directories
+  file:
+    path: /var/lib/tftpboot/{{ _iso['item']['name'] }}
+    state: directory
+    mode: 0755
+  loop: "{{ _isos_downloaded['results'] }}"
+  loop_control:
+    label: "{{ _iso['item']['description'] }}"
+    loop_var: _iso
+  tags:
+    - iso
+  
+- name: Copy bootable kernel images for all OSs
+  synchronize:
+    src: "{{ iso_mount_directory }}/{{ _iso['item']['name'] }}/images/pxeboot/vmlinuz"
+    dest: "/var/lib/tftpboot/{{ _iso['item']['name'] }}/vmlinuz"
+  delegate_to: "{{ inventory_hostname }}"
+  loop: "{{ _isos_downloaded['results'] }}"
+  loop_control:
+    label: "{{ _iso['item']['description'] }}"
+    loop_var: _iso
+  tags:
+    - iso
+
+- name: Copy initrd images for all OSs
+  synchronize:
+    src: "{{ iso_mount_directory }}/{{ _iso['item']['name'] }}/images/pxeboot/initrd.img"
+    dest: "/var/lib/tftpboot/{{ _iso['item']['name'] }}/initrd.img"
+  delegate_to: "{{ inventory_hostname }}"
+  loop: "{{ _isos_downloaded['results'] }}"
+  loop_control:
+    label: "{{ _iso['item']['description'] }}"
+    loop_var: _iso
+  tags:
+    - iso
+

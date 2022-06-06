@@ -1,0 +1,14 @@
+text
+lang en_US.UTF-8
+keyboard us
+timezone --utc Etc/UTC
+rootpw --plaintext rocky
+user --name=ansible --password=rocky --plaintext --gecos="Ansible User"
+ostreesetup --nogpg --url=http://{{ dhcpd_next_server }}/ostree/repo/ --osname=rocky-coreos --remote=rocky-coreos --ref=rocky/x86_64/coreos
+
+# Disk
+zerombr
+clearpart --all --initlabel
+autopart --type=plain
+
+reboot
