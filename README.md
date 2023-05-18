@@ -1,7 +1,7 @@
 # Rocky Linux Ostree
 This repository contains all the bits to get a working Ostree for Rocky Linux (8.6). Although Fedora and Red Hat CoreOS use (rpm)Ostree, this is NOT a CoreOS clone.
 
-If you want to build a Rocky Linux CoreOS, in other words a Red Hat CoreOS clone, then checkout [coreos-assembler](https://coreos.github.io/rpm-ostree/compose-server). Other sites with information about CoreOS and building custom OStree(s):
+If you want to build a Rocky Linux CoreOS, in other words a Red Hat CoreOS clone, then checkout [coreos-assembler](https://coreos.github.io/coreos-assembler/). Other sites with information about CoreOS and building custom OStree(s):
 
 * https://coreos.github.io/rpm-ostree/compose-server/
 * https://www.osbuild.org/
